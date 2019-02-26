@@ -21,6 +21,21 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
+function getreading(e) {
+    var layer = e.target;
+
+    fetch('/' + layer.feature.properties.site_id)
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        var ph = data[0]['ph'];
+        var date = data[0]['date'];
+        L.popup().setLatLng(e.latlng)
+            .setContent('ph for ' + date + ': ' + ph)
+            .openOn(mymap);
+    });
+}
+
 fetch('/sites.json')
     .then(function(response) {
         return response.json();
@@ -28,35 +43,12 @@ fetch('/sites.json')
     .then(function(sites) {
         L.geoJSON(sites, {
             onEachFeature: function(feature, layer) {
-                layer.bindTooltip(feature.properties.name);
-                layer.on('mouseover',function() {layer.openTooltip(); });
-                layer.on('mouseout',function() {layer.closeTooltip(); });
+                layer.on({
+                    click: getreading
+                });
         },
             pointToLayer: function(feature,latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             }
         }).addTo(mymap);
     })
-
-
-// function featureJoinByProperty(fProps, dTable, joinKey) {
-//     var keyVal = fProps[joinKey];
-//     var match = {};
-//     for (var i = 0; i < dTable.length; i++) {
-//         if (dTable[i][joinKey] == keyVal) {
-//             match = dTable[i];
-//             for (key in match) {
-//                 if (!(key in fProps)) {
-//                     fProps[key] = match[key];
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// samplingsites.eachLayer(function (layer) {
-//     featureJoinByProperty(layer.feature.properties, data, 'site_id');
-//     console.log(layer.feature.properties.ph);
-// });
-
-// // how do i perform operations on a selection/use the joined data to populate the tooltip?
