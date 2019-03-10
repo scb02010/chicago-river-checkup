@@ -21,21 +21,6 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
-function getreading(e) {
-    var layer = e.target;
-
-    fetch('/' + layer.feature.properties.site_id)
-    .then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        var ph = data[0]['ph'];
-        var date = data[0]['date'];
-        L.popup().setLatLng(e.latlng)
-            .setContent('ph for ' + date + ': ' + ph)
-            .openOn(mymap);
-    });
-}
-
 fetch('/sites.json')
     .then(function(response) {
         return response.json();
@@ -44,7 +29,7 @@ fetch('/sites.json')
         L.geoJSON(sites, {
             onEachFeature: function(feature, layer) {
                 layer.on({
-                    click: getreading
+                    click: drawgraph
                 });
         },
             pointToLayer: function(feature,latlng) {
@@ -52,3 +37,91 @@ fetch('/sites.json')
             }
         }).addTo(mymap);
     })
+
+var siteids = [];
+
+
+var dataset = [];
+
+function drawgraph(e) {
+    var layer = e.target;
+
+    var options = {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "pH over time"
+        },
+        axisX: {
+            valueFormatString: "DD MMM YYYY",
+        },
+        axisY: {
+            title: "pH",
+            titleFontSize: 24,
+            includeZero: false
+        },
+        toolTip: {
+            shared:true
+        },
+        legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "right",
+            dockInsidePlotArea: false,
+            itemclick: toggleDataSeries
+        },
+        data: dataset
+    };
+
+    function addData(data) {
+        let series = []
+
+        for (let i = 0; i < data.length; i++) {
+            series.push({
+                x: new Date(data[i].date),
+                y: data[i].ph
+            });
+        }
+        addSeries(series,layer.feature.properties.name)
+
+        // old get reading portion
+        var ph = data[0]['ph'];
+        var date = data[0]['date'];
+        L.popup().setLatLng(e.latlng)
+            .setContent('ph for ' + date + ': ' + ph)
+            .openOn(mymap);
+        //end get reading
+        $("#chartContainer").CanvasJSChart(options);
+    
+    }
+    
+    function toggleDataSeries(e){
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else{
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+
+    function makegraph() {
+        if (siteids.includes(layer.feature.properties.site_id)) {
+            console.log('already in')
+        } else {
+            siteids.push(layer.feature.properties.site_id)
+            $.getJSON('/readings/' + layer.feature.properties.site_id, addData);
+    }}
+
+    function addSeries(readings, name) {
+        const series = {
+            type: "spline",
+            showInLegend: true,
+            dataPoints: readings,
+            name: name
+        }
+        dataset.push(series)
+    }
+
+    makegraph()
+
+};

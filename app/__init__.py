@@ -11,7 +11,7 @@ def create_app():
 
     api.add_resource(IndexController, '/')
     api.add_resource(FileController, '/<string:filename>')
-    api.add_resource(ReadingsController, '/<int:site_id>')
+    api.add_resource(ReadingsController, '/readings/<int:site_id>')
 
     return app
 
