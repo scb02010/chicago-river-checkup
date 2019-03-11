@@ -11,7 +11,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
 }).addTo(mymap);
 
-
 var geojsonMarkerOptions = {
     radius: 8,
     fillColor: "#ff7800:",
@@ -39,39 +38,29 @@ fetch('/sites.json')
     })
 
 var siteids = [];
-
-
+var activeparam = 'ph';
 var dataset = [];
 
-function drawgraph(e) {
-    var layer = e.target;
+// the name is getting labelled as the most recently selected feature's name for all series in graph upon param switch
 
-    var options = {
-        animationEnabled: true,
-        theme: "light2",
-        title: {
-            text: "pH over time"
-        },
-        axisX: {
-            valueFormatString: "DD MMM YYYY",
-        },
-        axisY: {
-            title: "pH",
-            titleFontSize: 24,
-            includeZero: false
-        },
-        toolTip: {
-            shared:true
-        },
-        legend: {
-            cursor: "pointer",
-            verticalAlign: "top",
-            horizontalAlign: "right",
-            dockInsidePlotArea: false,
-            itemclick: toggleDataSeries
-        },
-        data: dataset
-    };
+function drawgraph(e) {
+    // changing parameter at top
+    $('.btn').off().on('click',function() {
+        console.log('hola');
+        $(".btn-group").find(".active").removeClass("active");
+        $(this).addClass("active");
+        activeparam = ($('.active').attr('id'));
+
+        dataset = [];
+        for (var i = 0, len = siteids.length; i < len; i++) {
+            console.log(i);
+            console.log('hello');
+            console.log(siteids);
+            $.getJSON('/readings/' + siteids[i], addData)
+        }
+    });
+
+    var layer = e.target;
 
     function addData(data) {
         let series = []
@@ -79,18 +68,46 @@ function drawgraph(e) {
         for (let i = 0; i < data.length; i++) {
             series.push({
                 x: new Date(data[i].date),
-                y: data[i].ph
+                y: data[i][activeparam]
             });
         }
         addSeries(series,layer.feature.properties.name)
 
         // old get reading portion
-        var ph = data[0]['ph'];
+        var paramreading = data[0][activeparam];
         var date = data[0]['date'];
         L.popup().setLatLng(e.latlng)
-            .setContent('ph for ' + date + ': ' + ph)
+            .setContent(activeparam + ' for ' + date + ': ' + paramreading)
             .openOn(mymap);
         //end get reading
+
+        let options = {
+            animationEnabled: true,
+            theme: "light2",
+            title: {
+                text: activeparam + " over time"
+            },
+            axisX: {
+                valueFormatString: "DD MMM YYYY",
+            },
+            axisY: {
+                title: activeparam,
+                titleFontSize: 24,
+                includeZero: false
+            },
+            toolTip: {
+                shared:true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                horizontalAlign: "right",
+                dockInsidePlotArea: false,
+                itemclick: toggleDataSeries
+            },
+            data: dataset
+        };
+
         $("#chartContainer").CanvasJSChart(options);
     
     }
