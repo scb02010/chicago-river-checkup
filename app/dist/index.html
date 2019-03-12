@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin=""/>
@@ -15,12 +17,20 @@
    <style>
    #watermap { 
     height: 500px;
-    width: 600px; }
+    width: 600px;
+    position: absolute; }
    </style>
 </head>
 <body>
+    <div class="btn-group" role="group" aria-label="parameter">
+            <button type="button" class="btn btn-secondary active" id = 'ph'>pH</button>
+            <button type="button" class="btn btn-secondary" id = 'do'>dissolved oxgyen</button>
+            <button type="button" class="btn btn-secondary" id = 'phosphate'>phosphate</button>
+            <button type="button" class="btn btn-secondary" id = 'conductivity'>conductivity</button>
+            <button type="button" class="btn btn-secondary" id = 'tempcelsius'>temperature</button>
+            </div>
     <div id="watermap"></div>
-    <div id="chartContainer" style="height: 300px; width: 500px;"></div>
+    <div id="chartContainer" style="height: 300px; width: 500px; position: absolute; right: 150px;"></div>
     <script type="text/javascript" src="watermap.js"></script>
 </body>
 
