@@ -28,7 +28,7 @@ fetch('/sites.json')
         L.geoJSON(sites, {
             onEachFeature: function(feature, layer) {
                 layer.on({
-                    click: drawgraph
+                    click: onSiteClick
                 });
         },
             pointToLayer: function(feature,latlng) {
@@ -36,82 +36,44 @@ fetch('/sites.json')
             }
         }).addTo(mymap);
     })
-
+    
+var names = {}
 var siteids = [];
 var activeparam = 'ph';
 var dataset = [];
 
-// the name is getting labelled as the most recently selected feature's name for all series in graph upon param switch
+// parameter selection
+$('.btn').on('click', onParamButtonClick);
 
-function drawgraph(e) {
-    // changing parameter at top
-    $('.btn').off().on('click',function() {
-        console.log('hola');
-        $(".btn-group").find(".active").removeClass("active");
-        $(this).addClass("active");
-        activeparam = ($('.active').attr('id'));
+function drawgraph() {
 
-        dataset = [];
-        for (var i = 0, len = siteids.length; i < len; i++) {
-            console.log(i);
-            console.log('hello');
-            console.log(siteids);
-            $.getJSON('/readings/' + siteids[i], addData)
-        }
-    });
+    let options = {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: activeparam + " over time"
+        },
+        axisX: {
+            valueFormatString: "DD MMM YYYY",
+        },
+        axisY: {
+            title: activeparam,
+            titleFontSize: 24,
+            includeZero: false
+        },
+        toolTip: {
+            shared:true
+        },
+        legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "right",
+            dockInsidePlotArea: false,
+            itemclick: toggleDataSeries
+        },
+        data: dataset
+    };
 
-    var layer = e.target;
-
-    function addData(data) {
-        let series = []
-
-        for (let i = 0; i < data.length; i++) {
-            series.push({
-                x: new Date(data[i].date),
-                y: data[i][activeparam]
-            });
-        }
-        addSeries(series,layer.feature.properties.name)
-
-        // old get reading portion
-        var paramreading = data[0][activeparam];
-        var date = data[0]['date'];
-        L.popup().setLatLng(e.latlng)
-            .setContent(activeparam + ' for ' + date + ': ' + paramreading)
-            .openOn(mymap);
-        //end get reading
-
-        let options = {
-            animationEnabled: true,
-            theme: "light2",
-            title: {
-                text: activeparam + " over time"
-            },
-            axisX: {
-                valueFormatString: "DD MMM YYYY",
-            },
-            axisY: {
-                title: activeparam,
-                titleFontSize: 24,
-                includeZero: false
-            },
-            toolTip: {
-                shared:true
-            },
-            legend: {
-                cursor: "pointer",
-                verticalAlign: "top",
-                horizontalAlign: "right",
-                dockInsidePlotArea: false,
-                itemclick: toggleDataSeries
-            },
-            data: dataset
-        };
-
-        $("#chartContainer").CanvasJSChart(options);
-    
-    }
-    
     function toggleDataSeries(e){
         if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
@@ -121,13 +83,54 @@ function drawgraph(e) {
         e.chart.render();
     }
 
-    function makegraph() {
-        if (siteids.includes(layer.feature.properties.site_id)) {
-            console.log('already in')
-        } else {
-            siteids.push(layer.feature.properties.site_id)
-            $.getJSON('/readings/' + layer.feature.properties.site_id, addData);
-    }}
+    $("#chartContainer").CanvasJSChart(options);
+};
+
+
+function onParamButtonClick() {
+    $(".btn-group").find(".active").removeClass("active");
+    $(this).addClass("active");
+    activeparam = ($('.active').attr('id'));
+
+    dataset = [];
+
+    if (siteids.length > 0) {
+    updateData(siteids);
+    }
+};
+
+function onSiteClick(e) {
+    var layer = e.target; 
+
+    if (siteids.includes(layer.feature.properties.site_id)) {
+        console.log('already in')
+    } else {
+        siteids.push(layer.feature.properties.site_id)
+        updateData([layer.feature.properties.site_id]);
+        names[layer.feature.properties.site_id] = layer.feature.properties.name;
+}
+};
+
+function updateData(toUpdate) {
+    toUpdate.forEach(function(site_id) {
+        $.getJSON('/readings/' + site_id, function(data) {
+            addData(data,site_id)
+        })
+    });
+
+    function addData(data,siteno) {
+        let readings = []
+
+        for (let i = 0; i < data.length; i++) {
+            readings.push({
+                x: new Date(data[i].date),
+                y: data[i][activeparam]
+            });
+        }
+
+        addSeries(readings,names[siteno])
+
+    };
 
     function addSeries(readings, name) {
         const series = {
@@ -137,8 +140,8 @@ function drawgraph(e) {
             name: name
         }
         dataset.push(series)
+        drawgraph()
     }
-
-    makegraph()
-
 };
+
+
