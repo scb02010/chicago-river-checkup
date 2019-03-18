@@ -48,6 +48,8 @@ $('.btn').on('click', onParamButtonClick);
 function drawgraph() {
 
     let options = {
+        zoomEnabled: true,
+        panEnabled: true,
         animationEnabled: true,
         theme: "light2",
         title: {
@@ -69,17 +71,20 @@ function drawgraph() {
             verticalAlign: "top",
             horizontalAlign: "right",
             dockInsidePlotArea: false,
-            itemclick: toggleDataSeries
+            itemclick: removeSeries
         },
         data: dataset
     };
 
-    function toggleDataSeries(e){
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        } else{
-            e.dataSeries.visible = true;
-        }
+    function removeSeries(e){
+        for (let i = 0; i< (e.chart.data).length; i++) {
+            if (e.chart.data[i].name == e.dataSeries.name) {
+                e.chart.data[i].remove();
+                let sitetoremove = Object.keys(names).find(key => names[key] === (e.dataSeries.name))
+                console.log(sitetoremove);
+                console.log(siteids);
+                // now just figure out how to remove that one
+        }}
         e.chart.render();
     }
 
