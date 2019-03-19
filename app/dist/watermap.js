@@ -81,8 +81,7 @@ function drawgraph() {
             if (e.chart.data[i].name == e.dataSeries.name) {
                 e.chart.data[i].remove();
                 let sitetoremove = Object.keys(names).find(key => names[key] === (e.dataSeries.name))
-                console.log(sitetoremove);
-                console.log(siteids);
+                siteids.splice(siteids.indexOf(Number(sitetoremove)),1);
                 // now just figure out how to remove that one
         }}
         e.chart.render();
@@ -116,6 +115,7 @@ function onSiteClick(e) {
 }
 };
 
+// readings must be sorted by date
 function updateData(toUpdate) {
     toUpdate.forEach(function(site_id) {
         $.getJSON('/readings/' + site_id, function(data) {
