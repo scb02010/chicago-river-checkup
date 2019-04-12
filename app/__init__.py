@@ -42,8 +42,11 @@ def create_db():
 def create_sites(sitepath):
     sites = pd.read_csv(sitepath)
     for i,row in sites.iterrows():
-        toadd = Site(int(sites.loc[i]['site_id']), sites.loc[i]['name'], sites.loc[i]['waterbody'])
-        db.session.add(toadd)
+        site = Site(
+            site_id = int(sites.loc[i]['site_id']), 
+            name = sites.loc[i]['name'], 
+            waterbody = sites.loc[i]['waterbody'])
+        db.session.add(site)
         db.session.commit()
 
 @click.command('create_readings')
@@ -54,16 +57,17 @@ def create_readings(readingspath):
     readings['date'] = pd.to_datetime(readings.date)
     readings.sort_values('date',inplace=True)
     for i,row in readings.iterrows():
-        toadd = Readings(int(readings.loc[i]['reading_id']),
-            int(readings.loc[i]['site_id']),
-            readings.loc[i]['date'],
-            readings.loc[i]['time'],
-            readings.loc[i]['tempcelsius'],
-            readings.loc[i]['ph'],
-            readings.loc[i]['do'],
-            readings.loc[i]['phosphate'],
-            readings.loc[i]['conductivity'])
-        db.session.add(toadd)
+        reading = Readings(
+            reading_id = int(readings.loc[i]['reading_id']),
+            site_id = int(readings.loc[i]['site_id']),
+            date = readings.loc[i]['date'],
+            time = readings.loc[i]['time'],
+            tempcelsius = readings.loc[i]['tempcelsius'],
+            ph = readings.loc[i]['ph'],
+            do = readings.loc[i]['do'],
+            phosphate = readings.loc[i]['phosphate'],
+            conductivity = readings.loc[i]['conductivity'])
+        db.session.add(reading)
     db.session.commit()
 
 
