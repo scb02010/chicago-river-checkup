@@ -1,4 +1,4 @@
-var mymap = L.map('watermap').setView([41.945266, -87.669750], 10)
+var mymap = L.map('watermap').setView([41.89, -87.64], 12)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
@@ -48,15 +48,21 @@ function drawgraph() {
         zoomEnabled: true,
         panEnabled: true,
         animationEnabled: true,
+        backgroundColor: null ,
         theme: "light2",
-        title: {
-            text: activeparam + " over time"
-        },
+        // title: {
+        //     text: activeparam + " over time",
+        //     fontFamily: "tahoma",
+        //     fontSize: 26,
+        //     fontWeight: "lighter"
+        // },
         axisX: {
             valueFormatString: "DD MMM YYYY",
         },
         axisY: {
             title: activeparam,
+            titlefontFamily: "tahoma",
+            titlefontWeight: "lighter",
             titleFontSize: 24,
             includeZero: false
         },
