@@ -18,15 +18,3 @@ class Readings(db.Model, JsonModel):
 
     def __repr__(self):
         return '<Readings for %r>' % self.site_id
-
-
-    def __init__(self,reading_id, site_id, date, time, tempcelsius, ph, do, phosphate, conductivity):
-       self.reading_id = reading_id
-       self.site_id = site_id
-       self.date = date
-       self.time = time
-       self.tempcelsius = tempcelsius
-       self.ph = ph
-       self.do = do
-       self.phosphate = phosphate 
-       self.conductivity = conductivity

@@ -8,8 +8,3 @@ class Site(db.Model):
 
     def __repr__(self):
         return '<Site %r>' % self.name
-
-    def __init__(self, site_id, name, waterbody):
-        self.site_id = site_id
-        self.name = name
-        self.waterbody = waterbody

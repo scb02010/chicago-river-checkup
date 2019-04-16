@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sierra Club Water Testing</title>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
@@ -18,16 +23,51 @@
 
 </head>
 <body>
-    <div class="btn-group" role="group" aria-label="parameter">
-            <button type="button" class="btn btn-secondary active" id = 'ph'>pH</button>
-            <button type="button" class="btn btn-secondary" id = 'do'>dissolved oxgyen</button>
-            <button type="button" class="btn btn-secondary" id = 'phosphate'>phosphate</button>
-            <button type="button" class="btn btn-secondary" id = 'conductivity'>conductivity</button>
-            <button type="button" class="btn btn-secondary" id = 'tempcelsius'>temperature</button>
+<body style="background-color:white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Chicago River Water Quality</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Map<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Data</a>
+            <a class="nav-item nav-link" href="#">About</a>
             </div>
-    <div id="watermap"></div>
-    <div id="chartContainer" style="height: 300px; width: 500px; position: absolute; right: 150px;"></div>
-    <script type="text/javascript" src="watermap.js"></script>
+        </div>
+        </nav>
+
+<div class="container-fluid">
+    <div class="row no-gutters">
+                
+        <nav class="shadow-lg col-lg-5 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <div id="testbox">
+                    <h6 class="sidebar-heading d-flex justify-content-center align-items-center px mt mb-1 text-muted">
+                    <!-- <b>parameter</b> -->
+                    <a class="side-nav-item nav-link active" href="#" id='ph'>pH<span class="sr-only">(current)</span></a>
+                    <a class="side-nav-item nav-link" href="#" id='do'>Dissolved Oxygen</a>
+                    <a class="side-nav-item nav-link" href="#" id='phosphate'>Phosphate</a>
+                    <a class="side-nav-item nav-link" href="#" id='conductivity'>Conductivity</a>
+                    <a class="side-nav-item nav-link" href="#" id='tempcelsius'>Temperature</a>
+                    </h6>
+                    </div>
+
+                    <div id="chartContainer"></div>
+
+                    <div id = "paraminfo">
+
+                 </div>
+                </nav>
+        <div class="col-12 col-lg-7">
+                <div id="watermap"></div>
+            </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="watermap.js"></script>
+
 </body>
 
 

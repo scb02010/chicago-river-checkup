@@ -1,4 +1,4 @@
-var mymap = L.map('watermap').setView([41.945266, -87.669750], 10)
+var mymap = L.map('watermap').setView([41.89, -87.64], 12)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
@@ -12,12 +12,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 
 var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800:",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
+    icon : L.divIcon({ 
+        className : 'circle',
+        iconSize : [ 15, 15 ]})
 };
 
 fetch('/sites.json')
@@ -32,7 +29,7 @@ fetch('/sites.json')
                 });
         },
             pointToLayer: function(feature,latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.marker(latlng, geojsonMarkerOptions).bindTooltip(feature.properties.name);
             }
         }).addTo(mymap);
     })
@@ -43,7 +40,7 @@ var activeparam = 'ph';
 var dataset = [];
 
 // parameter selection
-$('.btn').on('click', onParamButtonClick);
+$('.side-nav-item').on('click', onParamButtonClick);
 
 function drawgraph() {
 
@@ -51,15 +48,21 @@ function drawgraph() {
         zoomEnabled: true,
         panEnabled: true,
         animationEnabled: true,
+        backgroundColor: null ,
         theme: "light2",
-        title: {
-            text: activeparam + " over time"
-        },
+        // title: {
+        //     text: activeparam + " over time",
+        //     fontFamily: "tahoma",
+        //     fontSize: 26,
+        //     fontWeight: "lighter"
+        // },
         axisX: {
             valueFormatString: "DD MMM YYYY",
         },
         axisY: {
             title: activeparam,
+            titlefontFamily: "tahoma",
+            titlefontWeight: "lighter",
             titleFontSize: 24,
             includeZero: false
         },
@@ -90,16 +93,27 @@ function drawgraph() {
     $("#chartContainer").CanvasJSChart(options);
 };
 
+var param = {
+    ph: {good: 5, bad: 6}, 
+    do: {good: 8, bad: 8}, 
+    phosphate: {good: 8, bad: 9},
+    conductivity: {good: 10, bad: 9},
+    tempcelsius: {good: 12, bad: 12}}
 
 function onParamButtonClick() {
-    $(".btn-group").find(".active").removeClass("active");
+    $(".side-nav-item.nav-link.active").removeClass('active');
     $(this).addClass("active");
-    activeparam = ($('.active').attr('id'));
-
+    activeparam = ($('.side-nav-item.active').attr('id'));
     dataset = [];
 
     if (siteids.length > 0) {
     updateData(siteids);
+
+    $(function () {
+          $("#paraminfo").empty();
+          $("#paraminfo").append(
+              '<b> Information about </b> <p>' + activeparam + '</p>' + '<p> <b> Good </b></p>' + param[activeparam].good + '<p> <b> Bad </b></p>' + param[activeparam].bad)
+        });
     }
 };
 
