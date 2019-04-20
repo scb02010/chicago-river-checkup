@@ -1,4 +1,4 @@
-h1 { font-family: Lato; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Lato; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Lato; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+h1 { font-family: Lato; color: #D62246; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bolder; line-height: 26.4px; } h3 { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Lato; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Lato; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
 
 #watermap { 
     height: 700px;
@@ -22,13 +22,10 @@ div.circle {
     padding-top: 30px;
     padding-left: 30px;
     padding-right: 20px;
-    padding-top: 20px;
     padding-left: 20px;
     padding-bottom: 20px;
     width: 91%;
     height: 200px;
-    margin-left:20px;
-    margin-top:70px;
 }
 
 .canvasjs-chart-credit {
@@ -55,9 +52,10 @@ div.circle {
 }
 
 #testbox {
-    background-color: rgba(25, 170, 238, 0.548);
+    background-color: #D62246;
 }
 
 .side-nav-item {
     color: white;
 }
+

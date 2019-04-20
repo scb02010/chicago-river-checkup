@@ -43,13 +43,19 @@ var dataset = [];
 $('.side-nav-item').on('click', onParamButtonClick);
 
 function drawgraph() {
+    CanvasJS.addColorSet("customColorSet1",
+        [// colorset array
+
+         '#17BEBB',
+         '#D62246'
+        ]); 
 
     let options = {
         zoomEnabled: true,
         panEnabled: true,
         animationEnabled: true,
         backgroundColor: null ,
-        theme: "light2",
+        colorset: "customColorSet1",
         // title: {
         //     text: activeparam + " over time",
         //     fontFamily: "tahoma",
@@ -58,12 +64,17 @@ function drawgraph() {
         // },
         axisX: {
             valueFormatString: "DD MMM YYYY",
+            lineThickness: 0,
         },
         axisY: {
-            title: activeparam,
-            titlefontFamily: "tahoma",
-            titlefontWeight: "lighter",
-            titleFontSize: 24,
+            gridColor: "darkgrey",
+            gridThickness: 1,
+            gridDashType: "dash",
+            lineThickness: 0,
+            //title: paramname[activeparam],
+            //titlefontFamily: "tahoma",
+            //titlefontWeight: "lighter",
+            //titleFontSize: 20,
             includeZero: false
         },
         toolTip: {
@@ -100,6 +111,14 @@ var param = {
     conductivity: {good: 10, bad: 9},
     tempcelsius: {good: 12, bad: 12}}
 
+var paramname = {
+    ph: {name: "pH", unit: ""},
+    do: {name: "Dissolved Oxygen", unit: "mg/L"},
+    phosphate: {name: "Phosphate", unit: "mg/L"},
+    conductivity: {name: "Conductivity", unit: "µs/cm"},
+    tempcelsius: {name:"Temperature", unit:"°C"}
+}
+
 function onParamButtonClick() {
     $(".side-nav-item.nav-link.active").removeClass('active');
     $(this).addClass("active");
@@ -112,7 +131,9 @@ function onParamButtonClick() {
     $(function () {
           $("#paraminfo").empty();
           $("#paraminfo").append(
-              '<b> Information about </b> <p>' + activeparam + '</p>' + '<p> <b> Good </b></p>' + param[activeparam].good + '<p> <b> Bad </b></p>' + param[activeparam].bad)
+              '<h1>' + paramname[activeparam].name + '</h1>'  +
+               paramname[activeparam].unit + '<br></br> '+
+               param[activeparam].good + '<p> <b> Bad </b></p>' + param[activeparam].bad)
         });
     }
 };
