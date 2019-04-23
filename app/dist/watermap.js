@@ -43,11 +43,13 @@ var dataset = [];
 $('.side-nav-item').on('click', onParamButtonClick);
 
 function drawgraph() {
-    CanvasJS.addColorSet("customColorSet1",
+    CanvasJS.addColorSet("waterColors",
         [// colorset array
-
          '#17BEBB',
-         '#D62246'
+         '#D62246',
+         '#DDDDDD',
+         '#212529',
+         '#695958'
         ]); 
 
     let options = {
@@ -55,7 +57,7 @@ function drawgraph() {
         panEnabled: true,
         animationEnabled: true,
         backgroundColor: null ,
-        colorset: "customColorSet1",
+        colorset: "waterColors",
         // title: {
         //     text: activeparam + " over time",
         //     fontFamily: "tahoma",
@@ -112,11 +114,16 @@ var param = {
     tempcelsius: {good: 12, bad: 12}}
 
 var paramname = {
-    ph: {name: "pH", unit: ""},
-    do: {name: "Dissolved Oxygen", unit: "mg/L"},
-    phosphate: {name: "Phosphate", unit: "mg/L"},
-    conductivity: {name: "Conductivity", unit: "µs/cm"},
-    tempcelsius: {name:"Temperature", unit:"°C"}
+    ph: {name: "pH", unit: "", description: 
+    "pH indicates the alkalinity or acidity \
+    of a substance from 1.0 to 14.0. Acidity increases as the pH gets lower. Changes in acidity can be caused by atmospheric deposition (acid rain), surrounding rock, and \
+    certain wastewater discharges. pH affects many chemical and biological processes in the water. The largest variety of aquatic animals prefer a range of 6.5-8.0. pH outside this range stresses \
+    athe physiological systems of most organisms and can reduce reproduction.",
+    range: "6.5-8.0"},
+    do: {name: "Dissolved Oxygen", unit: "mg/L", range: ">= 3 mg/L", description:'Dissolved oxygen (DO) is the amount of oxygen that is present in water. Water bodies receive oxygen from the atmosphere and from aquatic plants. Respiration by aquatic animals, decomposition, and various chemical reactions consume oxygen. Sources of oxygen-consuming waste include wastewater from sewage treatment plants, stormwater runoff from farmland or urban streets, feedlots, and failing septic systems.  DO levels fluctuate seasonally and over a 24-hour period. They vary with water temperature and altitude. Cold water holds more oxygen than warm water.  While each organism has its own DO tolerance range, generally, DO levels below 3 milligrams per liter (mg/L) are of concern and waters with levels below 1 mg/L are considered hypoxic and usually devoid of life.'},
+    phosphate: {name: "Phosphate", unit: "mg/L", description:'a'},
+    conductivity: {name: "Conductivity", unit: "µs/cm", description:'a'},
+    tempcelsius: {name:"Temperature", unit:"°C", range: "<= 30°C", description:'The rates of biological and chemical processes depend on temperature. Aquatic organisms from microbes to fish are dependent on certain temperature ranges for their optimal health. Optimal temperatures for fish depend on the species. Many organisms are unable to survive in temperatures above about 30°C. Causes of temperature change include weather, removal of shading streambank vegetation, impoundments, discharge of cooling water, urban stormwater, and groundwater inflows to the stream. Over time, an area’s climate has the strongest natural influence on a stream’s temperature.'},
 }
 
 function onParamButtonClick() {
@@ -132,8 +139,10 @@ function onParamButtonClick() {
           $("#paraminfo").empty();
           $("#paraminfo").append(
               '<h1>' + paramname[activeparam].name + '</h1>'  +
-               paramname[activeparam].unit + '<br></br> '+
-               param[activeparam].good + '<p> <b> Bad </b></p>' + param[activeparam].bad)
+               paramname[activeparam].unit + '<br>'+
+               'ideal range: ' + 
+               '<font color=#D62246>' + paramname[activeparam].range + '</font>' + '<hr style="height:2px; visibility:hidden;" />' +               
+               '<h3>' + paramname[activeparam].description + '</h3>')
         });
     }
 };
