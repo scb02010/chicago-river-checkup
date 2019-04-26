@@ -11,8 +11,13 @@ hr {
     margin-left: 5px;
     }
 
+#Welcome {
+    padding-top: 50px;
+    padding-left: 40px;
+}
+
 div.circle {
-    background-color:rgba(25, 170, 238, 0.548);
+    background-color:darkgrey;
     border-color: black;
     border-radius: 10px;
     border-style: solid;
@@ -41,7 +46,6 @@ div.circle {
 
 .canvasjs-chart-canvas {
     padding-right: 20px;
-    padding-top: 20px;
     padding-left: 20px;
     padding-bottom: 20px;
 
@@ -57,11 +61,14 @@ div.circle {
     margin-right: 0px;
 }
 
-#testbox {
-    background-color: #D62246;
-}
-
 .side-nav-item {
     color: white;
 }
 
+.bg-redpink {
+    background-color: #D62246;
+}
+
+#stars {
+    width: 100px;
+}

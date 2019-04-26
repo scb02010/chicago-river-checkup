@@ -9,6 +9,7 @@ from datetime import datetime
 from app.controllers.indexcontroller import IndexController
 from app.controllers.filecontroller import FileController
 from app.controllers.readingscontroller import ReadingsController
+from app.controllers.datacontroller import DataController
 from app.database import db
 from app.models.site import Site
 from app.models.readings import Readings
@@ -21,6 +22,7 @@ def create_app():
     api.add_resource(IndexController, '/')
     api.add_resource(FileController, '/<string:filename>')
     api.add_resource(ReadingsController, '/readings/<int:site_id>')
+    api.add_resource(DataController, '/data')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mapping.db'
     db.init_app(app)

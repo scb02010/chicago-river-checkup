@@ -121,15 +121,16 @@ var paramname = {
     athe physiological systems of most organisms and can reduce reproduction.",
     range: "6.5-8.0"},
     do: {name: "Dissolved Oxygen", unit: "mg/L", range: ">= 3 mg/L", description:'Dissolved oxygen (DO) is the amount of oxygen that is present in water. Water bodies receive oxygen from the atmosphere and from aquatic plants. Respiration by aquatic animals, decomposition, and various chemical reactions consume oxygen. Sources of oxygen-consuming waste include wastewater from sewage treatment plants, stormwater runoff from farmland or urban streets, feedlots, and failing septic systems.  DO levels fluctuate seasonally and over a 24-hour period. They vary with water temperature and altitude. Cold water holds more oxygen than warm water.  While each organism has its own DO tolerance range, generally, DO levels below 3 milligrams per liter (mg/L) are of concern and waters with levels below 1 mg/L are considered hypoxic and usually devoid of life.'},
-    phosphate: {name: "Phosphate", unit: "mg/L", description:'test'},
-    conductivity: {name: "Conductivity", unit: "µs/cm", description:'a'},
+    phosphate: {name: "Phosphate", unit: "mg/L", range: "< 0.1 mg/L", description:'Both phosphorus and nitrogen are essential nutrients for the plants and animals that make up the aquatic food web.  A modest increase in phosphorus can, under the right conditions, set off a whole chain of undesirable events in a stream including accelerated plant growth, algae blooms, low dissolved oxygen, and the death of certain fish, invertebrates, and other aquatic animals. There are many sources of phosphorus, both natural and human. These include soil and rocks, wastewater treatment plants, runoff from fertilized lawns and cropland, failing septic systems, runoff from animal manure storage areas, disturbed land areas, drained wetlands, water treatment, and commercial cleaning preparations. In nature, phosphorus usually exists as part of a phosphate molecule (PO4).  Total phosphorus should be less than 0.1 mg/L.'},
+    conductivity: {name: "Conductivity", unit: "µs/cm", range: "150-500 µs/cm", description:'Conductivity is a measure of the ability of water to pass an electrical current. Because dissolved salts and other inorganic chemicals conduct electrical current, conductivity increases as salinity increases. Conductivity is also affected by temperature: the warmer the water, the higher the conductivity.  Generally, human disturbance tends to increase the amount of dissolved solids entering waters which results in increased conductivity. Conductivity is measured in microsiemens per centimeter (µs/cm). The conductivity of rivers in the United States generally ranges from 50 to 1500 µs/cm. Streams supporting good mixed fisheries have a range between 150 and 500 µs/cm. Conductivity outside this range could indicate that the water is not suitable for certain species of fish or macroinvertebrates.'},
     tempcelsius: {name:"Temperature", unit:"°C", range: "<= 30°C", description:'The rates of biological and chemical processes depend on temperature. Aquatic organisms from microbes to fish are dependent on certain temperature ranges for their optimal health. Optimal temperatures for fish depend on the species. Many organisms are unable to survive in temperatures above about 30°C. Causes of temperature change include weather, removal of shading streambank vegetation, impoundments, discharge of cooling water, urban stormwater, and groundwater inflows to the stream. Over time, an area’s climate has the strongest natural influence on a stream’s temperature.'},
 }
 
 function onParamButtonClick() {
-    $(".side-nav-item.nav-link.active").removeClass('active');
+    $(".side-nav-item.active").removeClass('active');
     $(this).addClass("active");
     activeparam = ($('.side-nav-item.active').attr('id'));
+    console.log($('.side-nav-item.active'));
     dataset = [];
 
     if (siteids.length > 0) {
@@ -148,6 +149,15 @@ function onParamButtonClick() {
 };
 
 function onSiteClick(e) {
+    $("#welcomebox").empty();
+
+    $("#paraminfo").append(
+        '<h1>' + paramname[activeparam].name + '</h1>'  +
+         paramname[activeparam].unit + '<br>'+
+         'ideal range: ' + 
+         '<font color=#D62246>' + paramname[activeparam].range + '</font>' + '<hr style="height:2px; visibility:hidden;" />' +               
+         '<h3>' + paramname[activeparam].description + '</h3>');
+
     var layer = e.target; 
 
     if (siteids.includes(layer.feature.properties.site_id)) {
