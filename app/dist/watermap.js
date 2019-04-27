@@ -103,6 +103,7 @@ function drawgraph() {
         e.chart.render();
     }
 
+    $("#chartContainer").height('300px');
     $("#chartContainer").CanvasJSChart(options);
 };
 

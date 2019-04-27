@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="waterstyle.css">
+
   </head>
   <body>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,7 +20,7 @@
 
         <body style="background-color:white">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <a class="navbar-brand" href="#">Chicago River Water Quality</a>
+                        <a class="navbar-brand" href="/">Chicago River Water Quality</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -30,9 +32,6 @@
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-item nav-link active" id='data' href="/data">Data</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-item nav-link" id='about' href="#">About</a>
                                 </li>
                             </ul>
                             <!-- </div> -->
@@ -48,7 +47,7 @@
         </div>
 
         <script type="text/javascript"charset="utf-8">
-        console.log('hi');
+
             $('#watertable').bootstrapTable({
                 url: '/readings.json',
                 pagination: true,
@@ -60,12 +59,33 @@
                 }, {
                     field: 'date',
                     title: 'Date',
-                    sortable: true
+                    sortable: true, 
+                }, {
+                    field: 'time',
+                    title: 'Time',
+                    sortable: true,
                 }, {
                     field: 'ph',
                     title: 'pH',
                     sortable: true
+                }, {
+                    field: 'do',
+                    title: 'Dissolved Oxygen',
+                    sortable: true
+                }, {
+                    field: 'phosphate',
+                    title: 'Phosphate',
+                    sortable: true
+                }, {
+                    field: 'conductivity',
+                    title: 'Conductivity',
+                    sortable: true
+                }, {
+                    field: 'tempcelsius',
+                    title: 'Temperature',
+                    sortable: true
                 }]
+                
                 })
         </script>
 

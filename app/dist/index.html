@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<body style="background-color:white">
+<body style="background-color: whitesmoke">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Chicago River Water Quality</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,18 +39,14 @@
                 <li class="nav-item">
                     <a class="nav-item nav-link" id='data' href="/data">Data</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" id='about' href="#">About</a>
-                </li>
             </ul>
-            <!-- </div> -->
         </div>
         </nav>
 
 <div class="container-fluid">
     <div class="row no-gutters">
-                
-        <nav class="shadow-lg col-12 col-lg-5 d-md-block bg-light sidebar">
+        
+        <nav id='infosidebar' class="shadow-lg col-12 col-lg-5 bg-light sidebar">
                     <nav class="navbar navbar-expand-lg navbar-dark bg-redpink">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarNavAltMarkup" aria-controls="sidebarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -75,7 +71,7 @@
                                 </ul>
                             </div>
                     </nav>
-                    
+
                     <div id="welcomebox">
                         <div id="Welcome">
                                 <h1>Welcome</h1>
@@ -88,9 +84,11 @@
                                 </p>
                                 <img id=stars src="stars.svg"></img>
                         </div>
+                        <div id='fillbigspace' class='d-none d-lg-block'>
+                            </div>
                     </div>
 
-
+                    
                     <div id="chartContainer"></div>
 
                     <div id = "paraminfo"></div>
@@ -101,6 +99,23 @@
         </div>
     </div>
 </div>
+
+<footer class="footer">
+    <div id='bottominfo' class="container-fluid">
+        <div class="d-none d-lg-block ">
+            <p style= color:#212529; text-align:center;>
+                <span style="float:left;">Data Collected by <a href="https://www.sierraclub.org/illinois/chicago/water" style="color:#D62246">Sierra Club Chicago Water Team</a></span>
+                &nbsp;&nbsp;&nbsp; Last data update: April 27, 2019
+                <span style="float:right;">Website by: Sarah Buchhorn </span>
+            </p>
+        </div>
+        <div class="d-lg-none d-xl-none">
+            <img id='scope' src="telescope.svg"></img>
+            <span style="float:right;"><img id='github' src="mark-github.svg"></img></span>
+        </div>
+    
+    </div>
+</footer>
 
 <script type="text/javascript" src="watermap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -117,7 +132,6 @@
 </script>
 
 </body>
-
 
 </html>
 
