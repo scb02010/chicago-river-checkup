@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Chicago River Water Testing Data</title>
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico"/>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
@@ -20,7 +23,7 @@
 
         <body style="background-color:white">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <a class="navbar-brand" href="/">Chicago River Water Quality</a>
+                        <a class="navbar-brand" href="/" style="font-family:Pacifico; font-size:25px; line-height: 20px; font-color:whitesmoke;">ChicagoRiver<br><h7>checkup</h7></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -31,7 +34,7 @@
                                     <a class="nav-item nav-link" id='map' href="/">Map<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-item nav-link active" id='data' href="/data">Data</a>
+                                    <a class="nav-item nav-link active" id='data' href="/datatable">Data</a>
                                 </li>
                             </ul>
                             <!-- </div> -->
@@ -49,13 +52,13 @@
         <script type="text/javascript"charset="utf-8">
 
             $('#watertable').bootstrapTable({
-                url: '/readings.json',
+                url: '/data',
                 pagination: true,
                 search: true,
                 columns: [{
-                    field: 'site_id',
-                    title: 'Site ID',
-                    sortable: true
+                    field: 'sitename',
+                    title: 'Site',
+                    sortable: true,
                 }, {
                     field: 'date',
                     title: 'Date',
@@ -69,7 +72,7 @@
                     title: 'pH',
                     sortable: true
                 }, {
-                    field: 'do',
+                    field: 'dissolved oxygen',
                     title: 'Dissolved Oxygen',
                     sortable: true
                 }, {
@@ -81,7 +84,7 @@
                     title: 'Conductivity',
                     sortable: true
                 }, {
-                    field: 'tempcelsius',
+                    field: 'temperature',
                     title: 'Temperature',
                     sortable: true
                 }]
