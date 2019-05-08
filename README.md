@@ -7,4 +7,4 @@ Medium blog series - Parts [one](https://medium.com/@sarah.buchhorn/water-and-we
 [two](https://medium.com/@sarah.buchhorn/water-and-webdev-part-ii-9e8e355d53fa), 
 [three](https://medium.com/@sarah.buchhorn/water-and-webdev-part-iii-8dd92e1f6c7)
 
-_Work in progress!_  All data displayed should be considered provisional.
+_Work in progress!_  All data and interpretation of values should be considered provisional.
