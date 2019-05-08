@@ -1,4 +1,27 @@
-h1 { font-family: Lato; color: #D62246; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bolder; line-height: 26.4px; } h3 { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: lighter; line-height: 15.4px; color: dimgrey;} p { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Lato; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Lato; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+h1 { font-family: Lato; color: #D62246; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bolder; line-height: 26.4px; } 
+h3 { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: lighter; line-height: 15.4px; color: dimgrey;} 
+p { font-family: Lato; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } 
+blockquote { font-family: Lato; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Lato; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+
+hr.new { 
+    display: block;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 0px;
+    color: #D62246;
+  } 
+
+h7 {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: lighter;
+    color: darkgrey;
+    letter-spacing: 3px;
+    vertical-align: top;
+    margin-left: 70px;
+}
 
 hr {
     margin-top: 0;
@@ -16,6 +39,7 @@ body {
 }
 
 #infosidebar {
+    max-height: 90vh;
 }
 
 #scope {
@@ -43,15 +67,63 @@ body {
     padding-right: 10px;
 }
 
-#watermap { 
+#watermap {
     min-height: 500px;
     height: 100%;
     margin-left: 5px;
     max-height: 90vh;
-    }
+}
 
-div.circle {
-    background-color:darkgrey;
+#paraminfo {
+    padding-left: 30px;
+    padding-right: 20px;
+    width: 91%;
+    overflow: scroll;
+    max-height: 0px;
+}
+
+@media (min-width: 992px) { 
+    #watermap { 
+        min-height: 500px;
+        height: 100%;
+        margin-left: 5px;
+        }
+
+    #paraminfo {
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        width: 91%;
+        overflow: auto;
+        max-height: 35%;
+    }
+ }
+
+div.redcircle {
+    background-color:rgba(255, 9, 9, 0.6);
+    border-color: black;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+div.yellowcircle {
+    background-color:rgba(255,255,0,0.6);
+    border-color: black;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+div.greencircle {
+    background-color: rgba(16, 219, 107, 0.6);
+    border-color: black;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+div.greycircle {
+    background-color:white;
     border-color: black;
     border-radius: 10px;
     border-style: solid;
@@ -73,8 +145,8 @@ div.circle {
 
 #fillbigspace {
     height: 30px;
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: 18vh;
+    padding-bottom: 17vh;
 }
 
 .canvasjs-chart-credit {
@@ -87,17 +159,6 @@ div.circle {
     padding-left: 20px;
     padding-bottom: 20px;
 
-}
-
-#paraminfo {
-    padding-top: 30px;
-    padding-left: 30px;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    width: 91%;
-    overflow: scroll;
-    max-height: 35%;
 }
 
 .container-fluid{

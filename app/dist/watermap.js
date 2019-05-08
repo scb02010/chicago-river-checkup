@@ -1,4 +1,4 @@
-var mymap = L.map('watermap').setView([41.89, -87.64], 12)
+var mymap = L.map('watermap').setView([41.95, -87.64], 11)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
@@ -13,31 +13,105 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 var geojsonMarkerOptions = {
     icon : L.divIcon({ 
-        className : 'circle',
+        className : 'greycircle',
         iconSize : [ 15, 15 ]})
 };
 
-fetch('/sites.json')
+function setupmap() {
+    fetch('/sites.json')
     .then(function(response) {
         return response.json();
     })
     .then(function(sites) {
         L.geoJSON(sites, {
             onEachFeature: function(feature, layer) {
+                $.getJSON('/readings/' + feature.properties.site_id, function(data) {
+                    var quest = data.slice(-1)[0][activeparam]
+                    var thedate = data.slice(-1)[0].date.slice(5,16)
+                    layer.setIcon(getIcon(quest));
+                    layer.bindTooltip('<b>' + feature.properties.name + '</b><br>' 
+                    + activeparam + ' was ' + String(quest) + ' on ' + thedate );
+                    })
+                layer.mytag = "geoJSON",
                 layer.on({
                     click: onSiteClick
-                });
+                })
         },
             pointToLayer: function(feature,latlng) {
-                return L.marker(latlng, geojsonMarkerOptions).bindTooltip(feature.properties.name);
+                return L.marker(latlng,geojsonMarkerOptions);
             }
         }).addTo(mymap);
     })
+};
+
+function cleanmap() {
+    mymap.eachLayer(function (layer) {
+        if (layer.mytag == "geoJSON") {
+            mymap.removeLayer(layer);
+        }
+    })
+}
+
+setupmap();
     
 var names = {}
 var siteids = [];
 var activeparam = 'ph';
 var dataset = [];
+
+//testing
+//get icons based on difficulty rating
+function getIcon(rating) {
+    if (activeparam == 'ph') {
+        return rating < 6.5 ? redIcon :
+           rating > 8.0 ? redIcon :
+                        greenIcon;
+    }
+    if (activeparam == 'do') {
+        return rating < 3 ? redIcon :
+        //rating > 6.5 ? yellowIcon :
+                     greenIcon; 
+    }
+    if (activeparam == 'conductivity') {
+        return rating > 500 ? redIcon :
+        rating < 150 ? redIcon :
+                     greenIcon;
+    }
+    if (activeparam == 'tempcelsius') {
+        return rating < 30 ? redIcon :
+        //rating > 6.5 ? yellowIcon :
+                     greenIcon;
+    }
+    if (activeparam == 'phosphate') {
+    return rating > 0.1 ? redIcon :
+    //rating > 6.5 ? yellowIcon :
+                    greenIcon;
+    }};
+
+var redIcon = L.divIcon({ 
+    className : 'redcircle',
+    iconSize : [ 15, 15 ]
+});
+var yellowIcon = L.divIcon({ 
+    className : 'yellowcircle',
+    iconSize : [ 15, 15 ]
+});
+var greenIcon = L.divIcon({ 
+    className : 'greencircle',
+    iconSize : [ 15, 15 ]
+});
+
+function mostrecent(allsites) {
+    allsites.forEach(function(site_id) {
+        $.getJSON('/readings/' + site_id, function(data) {
+            console.log(data.slice(-1)[0].activeparam) 
+        })
+    })
+};
+
+//mostrecent([1,2,3,4,5,6,7,8,9,10,11,12])
+
+//endtesting
 
 // parameter selection
 $('.side-nav-item').on('click', onParamButtonClick);
@@ -131,7 +205,9 @@ function onParamButtonClick() {
     $(".side-nav-item.active").removeClass('active');
     $(this).addClass("active");
     activeparam = ($('.side-nav-item.active').attr('id'));
-    console.log($('.side-nav-item.active'));
+    //console.log($('.side-nav-item.active'));
+    cleanmap();
+    setupmap();
     dataset = [];
 
     if (siteids.length > 0) {
@@ -175,6 +251,7 @@ function updateData(toUpdate) {
     toUpdate.forEach(function(site_id) {
         $.getJSON('/readings/' + site_id, function(data) {
             addData(data,site_id)
+            // console.log(data.slice(-1)[0]) most recent reading for that site
         })
     });
 
