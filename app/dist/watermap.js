@@ -78,7 +78,7 @@ function getIcon(rating) {
                      greenIcon;
     }
     if (activeparam == 'tempcelsius') {
-        return rating < 30 ? redIcon :
+        return rating > 30 ? redIcon :
         //rating > 6.5 ? yellowIcon :
                      greenIcon;
     }
@@ -227,6 +227,8 @@ function onParamButtonClick() {
 
 function onSiteClick(e) {
     $("#welcomebox").empty();
+    
+    $("#paraminfo").empty();
 
     $("#paraminfo").append(
         '<h1>' + paramname[activeparam].name + '</h1>'  +
