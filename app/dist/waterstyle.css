@@ -33,14 +33,14 @@ html {
     position: relative;
     min-height: 100%;
 }
-
+/* 
 body {
     margin-bottom: 50px;
-}
+} */
 
-#infosidebar {
+/* #infosidebar {
     max-height: 90vh;
-}
+} */
 
 #scope {
     height: 30px;
@@ -71,7 +71,7 @@ body {
     min-height: 500px;
     height: 100%;
     margin-left: 5px;
-    max-height: 90vh;
+    /* max-height: 90vh; */
 }
 
 #paraminfo {
@@ -169,6 +169,7 @@ div.greycircle {
 
 .row {
     margin-right: 0px;
+    height: -webkit-fill-available;
 }
 
 .side-nav-item {

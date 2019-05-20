@@ -64,17 +64,19 @@ var dataset = [];
 function getIcon(rating) {
     if (activeparam == 'ph') {
         return rating < 6.5 ? redIcon :
-           rating > 8.0 ? redIcon :
+           rating > 8.0 ? yellowIcon :
+           rating >= 9.0 ? redIcon :
                         greenIcon;
     }
     if (activeparam == 'do') {
         return rating < 3 ? redIcon :
-        //rating > 6.5 ? yellowIcon :
+        rating < 6 ? yellowIcon :
                      greenIcon; 
     }
     if (activeparam == 'conductivity') {
-        return rating > 500 ? redIcon :
-        rating < 150 ? redIcon :
+        return rating > 500 ? yellowIcon :
+        rating > 1900 ? redIcon :
+        rating < 150 ? yellowIcon :
                      greenIcon;
     }
     if (activeparam == 'tempcelsius') {
@@ -83,8 +85,8 @@ function getIcon(rating) {
                      greenIcon;
     }
     if (activeparam == 'phosphate') {
-    return rating > 0.1 ? redIcon :
-    //rating > 6.5 ? yellowIcon :
+        return rating >= 0.6 ? redIcon :
+        rating >= 0.3 ? yellowIcon :
                     greenIcon;
     }};
 
@@ -194,11 +196,15 @@ var paramname = {
     of a substance from 1.0 to 14.0. Acidity increases as the pH gets lower. Changes in acidity can be caused by atmospheric deposition (acid rain), surrounding rock, and \
     certain wastewater discharges. pH affects many chemical and biological processes in the water. The largest variety of aquatic animals prefer a range of 6.5-8.0. pH outside this range stresses \
     athe physiological systems of most organisms and can reduce reproduction.",
-    range: "6.5-8.0"},
-    do: {name: "Dissolved Oxygen", unit: "mg/L", range: ">= 3 mg/L", description:'Dissolved oxygen (DO) is the amount of oxygen that is present in water. Water bodies receive oxygen from the atmosphere and from aquatic plants. Respiration by aquatic animals, decomposition, and various chemical reactions consume oxygen. Sources of oxygen-consuming waste include wastewater from sewage treatment plants, stormwater runoff from farmland or urban streets, feedlots, and failing septic systems.  DO levels fluctuate seasonally and over a 24-hour period. They vary with water temperature and altitude. Cold water holds more oxygen than warm water.  While each organism has its own DO tolerance range, generally, DO levels below 3 milligrams per liter (mg/L) are of concern and waters with levels below 1 mg/L are considered hypoxic and usually devoid of life.'},
-    phosphate: {name: "Phosphate", unit: "mg/L", range: "< 0.1 mg/L", description:'Both phosphorus and nitrogen are essential nutrients for the plants and animals that make up the aquatic food web.  A modest increase in phosphorus can, under the right conditions, set off a whole chain of undesirable events in a stream including accelerated plant growth, algae blooms, low dissolved oxygen, and the death of certain fish, invertebrates, and other aquatic animals. There are many sources of phosphorus, both natural and human. These include soil and rocks, wastewater treatment plants, runoff from fertilized lawns and cropland, failing septic systems, runoff from animal manure storage areas, disturbed land areas, drained wetlands, water treatment, and commercial cleaning preparations. In nature, phosphorus usually exists as part of a phosphate molecule (PO4).  Total phosphorus should be less than 0.1 mg/L.'},
-    conductivity: {name: "Conductivity", unit: "µs/cm", range: "150-500 µs/cm", description:'Conductivity is a measure of the ability of water to pass an electrical current. Because dissolved salts and other inorganic chemicals conduct electrical current, conductivity increases as salinity increases. Conductivity is also affected by temperature: the warmer the water, the higher the conductivity.  Generally, human disturbance tends to increase the amount of dissolved solids entering waters which results in increased conductivity. Conductivity is measured in microsiemens per centimeter (µs/cm). The conductivity of rivers in the United States generally ranges from 50 to 1500 µs/cm. Streams supporting good mixed fisheries have a range between 150 and 500 µs/cm. Conductivity outside this range could indicate that the water is not suitable for certain species of fish or macroinvertebrates.'},
-    tempcelsius: {name:"Temperature", unit:"°C", range: "<= 30°C", description:'The rates of biological and chemical processes depend on temperature. Aquatic organisms from microbes to fish are dependent on certain temperature ranges for their optimal health. Optimal temperatures for fish depend on the species. Many organisms are unable to survive in temperatures above about 30°C. Causes of temperature change include weather, removal of shading streambank vegetation, impoundments, discharge of cooling water, urban stormwater, and groundwater inflows to the stream. Over time, an area’s climate has the strongest natural influence on a stream’s temperature.'},
+    range: "6.5-8.0, <9"},
+    do: {name: "Dissolved Oxygen", unit: "mg/L", 
+    range: ">= 6 mg/L, >3.5 mg/L", description:'Dissolved oxygen (DO) is the amount of oxygen that is present in water. Water bodies receive oxygen from the atmosphere and from aquatic plants. Respiration by aquatic animals, decomposition, and various chemical reactions consume oxygen. Sources of oxygen-consuming waste include wastewater from sewage treatment plants, stormwater runoff from farmland or urban streets, feedlots, and failing septic systems.  DO levels fluctuate seasonally and over a 24-hour period. They vary with water temperature and altitude. Cold water holds more oxygen than warm water.  While each organism has its own DO tolerance range, generally, DO levels below 3 milligrams per liter (mg/L) are of concern and waters with levels below 1 mg/L are considered hypoxic and usually devoid of life.'},
+    phosphate: {name: "Phosphate", unit: "mg/L", 
+    range: "< 0.3 mg/L, < 0.6 mg/L", description:'Both phosphorus and nitrogen are essential nutrients for the plants and animals that make up the aquatic food web.  A modest increase in phosphorus can, under the right conditions, set off a whole chain of undesirable events in a stream including accelerated plant growth, algae blooms, low dissolved oxygen, and the death of certain fish, invertebrates, and other aquatic animals. There are many sources of phosphorus, both natural and human. These include soil and rocks, wastewater treatment plants, runoff from fertilized lawns and cropland, failing septic systems, runoff from animal manure storage areas, disturbed land areas, drained wetlands, water treatment, and commercial cleaning preparations. In nature, phosphorus usually exists as part of a phosphate molecule (PO4).'},
+    conductivity: {name: "Conductivity", unit: "µs/cm", 
+    range: "150-500 µs/cm, <1900 µs/cm", description:'Conductivity is a measure of the ability of water to pass an electrical current. Because dissolved salts and other inorganic chemicals conduct electrical current, conductivity increases as salinity increases. Conductivity is also affected by temperature: the warmer the water, the higher the conductivity.  Generally, human disturbance tends to increase the amount of dissolved solids entering waters which results in increased conductivity. Conductivity is measured in microsiemens per centimeter (µs/cm). The conductivity of rivers in the United States generally ranges from 50 to 1500 µs/cm. Streams supporting good mixed fisheries have a range between 150 and 500 µs/cm. Conductivity outside this range could indicate that the water is not suitable for certain species of fish or macroinvertebrates.'},
+    tempcelsius: {name:"Temperature", unit:"°C", 
+    range: "< 30°C", description:'The rates of biological and chemical processes depend on temperature. Aquatic organisms from microbes to fish are dependent on certain temperature ranges for their optimal health. Optimal temperatures for fish depend on the species. Many organisms are unable to survive in temperatures above about 30°C. Causes of temperature change include weather, removal of shading streambank vegetation, impoundments, discharge of cooling water, urban stormwater, and groundwater inflows to the stream. Over time, an area’s climate has the strongest natural influence on a stream’s temperature.'},
 }
 
 function onParamButtonClick() {
@@ -227,7 +233,7 @@ function onParamButtonClick() {
 
 function onSiteClick(e) {
     $("#welcomebox").empty();
-    
+
     $("#paraminfo").empty();
 
     $("#paraminfo").append(
