@@ -129,26 +129,31 @@ function getIcon(rating) {
         return rating < 6.5 ? redIcon :
            rating > 8.0 ? yellowIcon :
            rating >= 9.0 ? redIcon :
+           rating == null ? greyIcon :
                         greenIcon;
     }
     if (activeparam == 'do') {
         return rating < 3 ? redIcon :
         rating < 6 ? yellowIcon :
+        rating == null ? greyIcon :
                      greenIcon; 
     }
     if (activeparam == 'conductivity') {
         return rating > 500 ? yellowIcon :
         rating > 1900 ? redIcon :
         rating < 150 ? yellowIcon :
+        rating == null ? greyIcon :
                      greenIcon;
     }
     if (activeparam == 'tempcelsius') {
         return rating > 30 ? redIcon :
+        rating == null ? greyIcon :
                      greenIcon;
     }
     if (activeparam == 'phosphate') {
         return rating >= 0.6 ? redIcon :
         rating >= 0.3 ? yellowIcon :
+        rating == null ? greyIcon :
                     greenIcon;
     }};
 
@@ -163,6 +168,10 @@ var yellowIcon = L.divIcon({
 });
 var greenIcon = L.divIcon({ 
     className : 'greencircle',
+    iconSize : [ 15, 15 ]
+});
+var greyIcon = L.divIcon({ 
+    className : 'greycircle',
     iconSize : [ 15, 15 ]
 });
 
@@ -247,7 +256,7 @@ var paramname = {
     "pH indicates the alkalinity or acidity \
     of a substance from 1.0 to 14.0. Acidity increases as the pH gets lower. Changes in acidity can be caused by atmospheric deposition (acid rain), surrounding rock, and \
     certain wastewater discharges. pH affects many chemical and biological processes in the water. The largest variety of aquatic animals prefer a range of 6.5-8.0. pH outside this range stresses \
-    athe physiological systems of most organisms and can reduce reproduction.",
+    the physiological systems of most organisms and can reduce reproduction.",
     range: "6.5-8.0"},
     do: {name: "Dissolved Oxygen", unit: "mg/L", 
     range: ">= 6 mg/L", description:'Dissolved oxygen (DO) is the amount of oxygen that is present in water. Water bodies receive oxygen from the atmosphere and from aquatic plants. Respiration by aquatic animals, decomposition, and various chemical reactions consume oxygen. Sources of oxygen-consuming waste include wastewater from sewage treatment plants, stormwater runoff from farmland or urban streets, feedlots, and failing septic systems.  DO levels fluctuate seasonally and over a 24-hour period. They vary with water temperature and altitude. Cold water holds more oxygen than warm water.  While each organism has its own DO tolerance range, generally, DO levels below 3 milligrams per liter (mg/L) are of concern and waters with levels below 1 mg/L are considered hypoxic and usually devoid of life.'},
