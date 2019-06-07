@@ -82,7 +82,7 @@ var paramcutoffs = {
             "rgba(255,255,0,0.6)",
             "rgba(255, 9, 9, 0.6)"
         ]},
-    conductivity: {grades: [0,150,500,1900],
+    conductivity: {grades: [0,150,500,1600],
         colors: [
             "rgba(255,255,0,0.6)",
             "rgba(16, 219, 107, 0.6)",
@@ -140,7 +140,7 @@ function getIcon(rating) {
     }
     if (activeparam == 'conductivity') {
         return rating > 500 ? yellowIcon :
-        rating > 1900 ? redIcon :
+        rating > 1600 ? redIcon :
         rating < 150 ? yellowIcon :
         rating == null ? greyIcon :
                      greenIcon;
