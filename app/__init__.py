@@ -11,6 +11,7 @@ from app.controllers.filecontroller import FileController
 from app.controllers.readingscontroller import ReadingsController
 from app.controllers.datacontroller import DataController
 from app.controllers.datatablecontroller import DataTableController
+from app.controllers.infocontroller import InfoController
 from app.database import db
 from app.models.site import Site
 from app.models.readings import Readings
@@ -25,6 +26,7 @@ def create_app():
     api.add_resource(ReadingsController, '/readings/<int:site_id>')
     api.add_resource(DataController, '/data')
     api.add_resource(DataTableController, '/datatable')
+    api.add_resource(InfoController, '/info')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mapping.db'
     app.config['SQLALCHEMY_ECHO'] = True
