@@ -343,7 +343,7 @@ function updateData(toUpdate) {
             type: "spline",
             lineDashType: "solid",
             lineThickness: 0.5,
-            connectNullData: false,
+            connectNullData: true,
             markerSize: 9,
             showInLegend: true,
             dataPoints: readings,
