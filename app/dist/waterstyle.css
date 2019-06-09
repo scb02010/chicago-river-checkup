@@ -24,7 +24,7 @@ blockquote { font-family: Lato; font-size: 21px; font-style: normal; font-varian
     }
 
 .backgroundwaterdiv::before {
-    background-image: url(riverpic_fornow.jpg);
+    background-image: url(riverpic.jpg);
     background-size: cover;
     content: "";
     display: block;
