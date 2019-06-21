@@ -20,6 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+        <script src="jquery.tabletocsv.js"></script>
 
         <body style="background-color:white">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,13 +44,15 @@
                             <!-- </div> -->
                         </div>
                         </nav>
-
         <div id='watertablediv' class='watertabledivclass'>
             <table id="watertable"
                 data-toggle="table"
                 data-pagination="true">
                 
             </table>
+            <button id="export" class="btn btn-primary">Export</button>
+            <span style="font-size: small">Only current rows will be exported.  To export more rows, increase the number of rows per page.</span>
+
         </div>
 
         <script type="text/javascript"charset="utf-8">
@@ -93,8 +96,14 @@
                 }]
                 
                 })
+            $('#export').on('click',function(){
+                $('#watertable').tableToCsv({
+                    fileName: 'sc_waterdata',
+                    extension: 'csv'
+                });
+            })
         </script>
-        
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138987987-1"></script>
 <script>
