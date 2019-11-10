@@ -133,9 +133,9 @@ function getIcon(rating) {
                         greenIcon;
     }
     if (activeparam == 'do') {
-        return rating < 3 ? redIcon :
-        rating < 6 ? yellowIcon :
-        rating == null ? greyIcon :
+        return rating == null ? greyIcon :
+        rating < 3 ? redIcon :
+        rating < 6 ? yellowIcon : 
                      greenIcon; 
     }
     if (activeparam == 'conductivity') {
