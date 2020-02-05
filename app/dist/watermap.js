@@ -212,8 +212,8 @@ function drawgraph() {
         axisX: {
             valueFormatString: "MMM YYYY",
             lineThickness: 0,
-            minimum: new Date(2018, 8, 1), 
-            maximum: new Date(2020, 2, 15)
+            minimum: new Date(2017, 2, 1), 
+            maximum: new Date(2020, 2, 1)
         },
         axisY: {
             gridColor: "#D7DBDD",
