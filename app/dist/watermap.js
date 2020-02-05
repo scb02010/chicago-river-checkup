@@ -210,8 +210,10 @@ function drawgraph() {
         //     fontWeight: "lighter"
         // },
         axisX: {
-            valueFormatString: "DD MMM YYYY",
+            valueFormatString: "MMM YYYY",
             lineThickness: 0,
+            minimum: new Date(2018, 8, 1), 
+            maximum: new Date(2020, 2, 15)
         },
         axisY: {
             gridColor: "#D7DBDD",
@@ -324,12 +326,20 @@ function updateData(toUpdate) {
         })
     });
 
+    function addDays(date, days) {
+        // from https://codewithhugo.com/add-date-days-js/
+        const copy = new Date(Number(date))
+        copy.setDate(date.getDate() + days)
+        return copy
+      }
+
     function addData(data,siteno) {
         let readings = []
 
         for (let i = 0; i < data.length; i++) {
+            mydate = new Date(data[i].date)
             readings.push({
-                x: new Date(data[i].date),
+                x: addDays(mydate, 1),
                 y: data[i][activeparam]
             });
         }
