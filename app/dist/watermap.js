@@ -65,7 +65,7 @@ var dataset = [];
 var paramcutoffs = {
     ph: {grades: [0,6.5,8,9], 
         colors: [
-        "rgba(255,255,0,0.6)",
+        "rgba(255, 9, 9, 0.6)",
         "rgba(16, 219, 107, 0.6)",
         "rgba(255,255,0,0.6)",
         "rgba(255, 9, 9, 0.6)" 
@@ -127,8 +127,8 @@ legend.addTo(mymap);
 function getIcon(rating) {
     if (activeparam == 'ph') {
         return rating < 6.5 ? redIcon :
-           rating > 8.0 ? yellowIcon :
            rating >= 9.0 ? redIcon :
+           rating > 8.0 ? yellowIcon :
            rating == null ? greyIcon :
                         greenIcon;
     }
@@ -139,8 +139,8 @@ function getIcon(rating) {
                      greenIcon; 
     }
     if (activeparam == 'conductivity') {
-        return rating > 500 ? yellowIcon :
-        rating > 1600 ? redIcon :
+        return  rating > 1600 ? redIcon :
+        rating > 500 ? yellowIcon :
         rating < 150 ? yellowIcon :
         rating == null ? greyIcon :
                      greenIcon;
