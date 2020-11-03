@@ -1,14 +1,14 @@
-var mymap = L.map('watermap').setView([41.95, -87.64], 11)
+var mymap = L.map('watermap').setView([41.91, -87.64], 11)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
+    id: 'mapbox/light-v10',
+    attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+    tileSize: 512,
     maxZoom: 18,
-    id: 'mapbox.light',
-    accessToken: mytoken, 
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+    zoomOffset: -1,
+    accessToken: mytoken
 }).addTo(mymap);
 
 var geojsonMarkerOptions = {
@@ -215,7 +215,7 @@ function drawgraph() {
             valueFormatString: "MMM YYYY",
             lineThickness: 0,
             minimum: new Date(2017, 2, 1), 
-            maximum: new Date(2020, 3, 1)
+            maximum: new Date(2020, 11, 1)
         },
         axisY: {
             gridColor: "#D7DBDD",
