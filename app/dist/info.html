@@ -62,17 +62,17 @@
         <div class="col-sm-3 text-center">
           <div class="card" style="background-color: rgba(255, 255, 255, 0.8)">
             <div class="card-body">
-              <h5 class="card-title text-center" style="font-family: Pacifico; font-weight: 900; font-size: 25px;">Contact</h5>
+              <h5 class="card-title text-center" style="font-family: Pacifico; font-weight: 900; font-size: 25px;">About</h5>
               <p class="card-text"><img src="question.png" class="mx-auto d-block" style="width: 50%;"></img><br>
-              <p class="card-text text-center">Get in touch with the Sierra Club Chicago Water Team</p>
+              <p class="card-text text-center">Learn more about the Sierra Club Chicago Water Team and Water Sampling Program</p>
               <a href="mailto: scchicagowaterteam@gmail.com" class="btn btn-primary">E-mail</a>
-            </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SCModal">Read More</button>            </div>
           </div>
         </div>
       </div>
 
       
-      <!-- Modal -->
+      <!-- Source Modal -->
       <div class="modal fade" id="sourceListModal" tabindex="-1" role="dialog" aria-labelledby="sourceListModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -102,6 +102,38 @@
               </ul> 
               <p style="font-size: 15px">Icons made by <a href="https://www.flaticon.com/authors/mynamepong" target="_blank">mynamepong</a> from <a href="https://www.flaticon.com" target="_blank">flaticon</a></p>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Info Modal -->
+      <div class="modal fade" id="SCModal" tabindex="-1" role="dialog" aria-labelledby="SCModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Sierra Club Chicago Water Team <br> Water Sampling Program</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              The Chicago Water Team’s Sampling Program goals include: 
+              <ul>
+              <li>Connecting us to our waterways </li>
+              <li>Exposing and opposing activities that damage our waters</li>
+              <li>Informing and educating the public</li>
+              <li>Influencing decision makers</li>
+                </ul>
+              <div>Dozens of volunteers have been trained and provided equipment to capture dissolved oxygen, 
+                temperature, phosphorus, conductivity, and pH readings at sampling sites on Chicago area waterways. 
+                Samplers also act as another set of eyes and ears ready to report abnormalities like excessive litter, 
+                pollution or suspicious chemical appearances.</div>
+                <br>
+                New volunteers welcome!  <a href='mailto:scchicagowaterteam@gmail.com'>E-mail us</a> and checkout the <a href="https://www.sierraclub.org/illinois/chicago/water-team", target='_blank'>website</a> for meeting information. 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
