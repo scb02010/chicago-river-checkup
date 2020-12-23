@@ -170,6 +170,7 @@ div.greycircle {
 #Welcome {
     padding-top: 50px;
     padding-left: 40px;
+    margin-right: 40px;
 }
 
 #stars {
@@ -202,6 +203,7 @@ div.greycircle {
 .container-fluid{
     padding-left: 0px;
     padding-right: 0px;
+    height:90vh;
 
 }
 
