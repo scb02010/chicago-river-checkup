@@ -159,7 +159,7 @@ div.greencircle {
 
 div.greycircle {
     background-color:white;
-    border-color: black;
+    border-color: grey;
     border-radius: 10px;
     border-style: solid;
 }

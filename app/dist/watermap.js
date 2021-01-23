@@ -28,7 +28,16 @@ function setupmap() {
                 $.getJSON('/readings/' + feature.properties.site_id, function(data) {
                     var quest = data.slice(-1)[0][activeparam]
                     var thedate = data.slice(-1)[0].date.slice(5,16)
-                    layer.setIcon(getIcon(quest));
+                    // only show data if less than 1 month old
+                    var date1 = new Date();
+                    date1.setMonth(date1.getMonth() - 1)
+                    var date2 = new Date(thedate);
+                    if (date1 < date2) {
+                        layer.setIcon(getIcon(quest));
+                    };
+                    if (date1 > date2) {
+                        layer.setIcon(greyIcon);
+                    };
                     layer.bindTooltip('<b>' + feature.properties.name + '</b><br>' 
                     + activeparam + ' was ' + String(quest) + ' on ' + thedate );
                     })
@@ -127,7 +136,8 @@ legend.addTo(mymap);
 // color by most recent reading
 function getIcon(rating) {
     if (activeparam == 'ph') {
-        return rating < 5 ? redIcon :
+        return rating == null ? greyIcon :
+           rating < 5 ? redIcon :
            rating >= 9.0 ? redIcon :
            rating > 8.0 ? yellowIcon :
            rating < 6.5 ? yellowIcon :
@@ -141,21 +151,21 @@ function getIcon(rating) {
                      greenIcon; 
     }
     if (activeparam == 'conductivity') {
-        return  rating > 1600 ? redIcon :
+        return  rating == null ? greyIcon :
+        rating > 1600 ? redIcon :
         rating > 500 ? yellowIcon :
         rating < 150 ? yellowIcon :
-        rating == null ? greyIcon :
                      greenIcon;
     }
     if (activeparam == 'tempcelsius') {
-        return rating > 30 ? redIcon :
-        rating == null ? greyIcon :
+        return rating == null ? greyIcon :
+        rating > 30 ? redIcon :
                      greenIcon;
     }
     if (activeparam == 'phosphate') {
-        return rating >= 0.6 ? redIcon :
+        return rating == null ? greyIcon :
+        rating >= 0.6 ? redIcon :
         rating >= 0.3 ? yellowIcon :
-        rating == null ? greyIcon :
                     greenIcon;
     }};
 
@@ -215,7 +225,7 @@ function drawgraph() {
             valueFormatString: "MMM YYYY",
             lineThickness: 0,
             minimum: new Date(2017, 2, 1), 
-            maximum: new Date(2020, 12, 6)
+            maximum: new Date(2021, 1, 2)
         },
         axisY: {
             gridColor: "#D7DBDD",
