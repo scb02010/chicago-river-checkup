@@ -2,6 +2,9 @@ var mymap = L.map('watermap').setView([41.91, -87.64], 11)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
+var lastupdate = 'January 22, 2021'
+$('#lastupdate').text(lastupdate);
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
     id: 'mapbox/light-v10',
     attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
@@ -28,8 +31,8 @@ function setupmap() {
                 $.getJSON('/readings/' + feature.properties.site_id, function(data) {
                     var quest = data.slice(-1)[0][activeparam]
                     var thedate = data.slice(-1)[0].date.slice(5,16)
-                    // only show data if less than 1 month old
-                    var date1 = new Date();
+                    // only show data if less than 1 month old from last update
+                    var date1 = new Date(lastupdate);
                     date1.setMonth(date1.getMonth() - 1)
                     var date2 = new Date(thedate);
                     if (date1 < date2) {
