@@ -2,7 +2,7 @@ var mymap = L.map('watermap').setView([41.91, -87.64], 11)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
-var lastupdate = 'January 22, 2021'
+var lastupdate = 'February 28, 2021'
 $('#lastupdate').text(lastupdate);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
@@ -155,6 +155,7 @@ function getIcon(rating) {
     }
     if (activeparam == 'conductivity') {
         return  rating == null ? greyIcon :
+        rating == '>1990' ? redIcon :
         rating > 1600 ? redIcon :
         rating > 500 ? yellowIcon :
         rating < 150 ? yellowIcon :
@@ -228,7 +229,7 @@ function drawgraph() {
             valueFormatString: "MMM YYYY",
             lineThickness: 0,
             minimum: new Date(2017, 2, 1), 
-            maximum: new Date(2021, 1, 2)
+            maximum: new Date(2021, 3, 1)
         },
         axisY: {
             gridColor: "#D7DBDD",
