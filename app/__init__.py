@@ -28,7 +28,7 @@ def create_app():
     api.add_resource(DataTableController, '/datatable')
     api.add_resource(InfoController, '/info')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mapping.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../app/mapping.db'
     app.config['SQLALCHEMY_ECHO'] = True
     db.init_app(app)
 
