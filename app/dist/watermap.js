@@ -2,7 +2,7 @@ var mymap = L.map('watermap').setView([41.94, -87.64], 11)
 
 var mytoken = 'pk.eyJ1Ijoic2NiMDIwMTAiLCJhIjoiY2pzM2Y2eHdjMmVuaTQ1bzN6OGE3MnJrYiJ9.5QDjNpLmtS-Y9N3nP2rLdQ'
 
-var lastupdate = 'January 14, 2023'
+var lastupdate = 'February 20, 2023'
 $('#lastupdate').text(lastupdate);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
@@ -229,7 +229,7 @@ function drawgraph() {
             valueFormatString: "MMM YYYY",
             lineThickness: 0,
             minimum: new Date(2018, 2, 1), 
-            maximum: new Date(2023, 2, 1)
+            maximum: new Date(2023, 3, 1)
         },
         axisY: {
             gridColor: "#D7DBDD",
